@@ -34,7 +34,8 @@ const validationSchema = yup.object({
   amount: yup
     .number()
     .typeError('Must be a number')
-    .positive('Must be a positive number')
+    .min(1, 'Min value is 1')
+    .max(50, 'Max value is 50')
     .integer('Must be an integer number')
     .required('Amount is required')
 });

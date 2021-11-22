@@ -77,6 +77,10 @@ function Result({ index, question, nextQuestion, lastQuestion}) {
     setView(dispatch, 'QuestionsSelector')
   }
 
+  const leave = () => {
+    setView(dispatch, 'QuestionsSelector')
+  }
+
   return (
     <Box className={classes.box}>
       <Box maxWidth='33rem'>
@@ -141,6 +145,16 @@ function Result({ index, question, nextQuestion, lastQuestion}) {
               disabled={Boolean(index===0)}
             >
               <KeyboardArrowLeftIcon />
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              color='secondary'
+              className={classes.button} 
+              variant='contained'
+              onClick={leave}
+            >
+              Leave
             </Button>
           </Grid>
           {index === state.questions.length-1 ? 

@@ -1,20 +1,35 @@
-const format = (htmlStr) => {
-  return htmlStr
-        .replaceAll('&amp;quot;', "'")  
-        .replaceAll('&#039;', "'")
-        .replaceAll('&quot;', '"')  
-        .replaceAll(/&quot;/g, '"')
-        
+const format = (html) => {
+  if (typeof(html) === 'string') {
+    return html
+          .replaceAll('&amp;quot;', "'")  
+          .replaceAll('&#039;', "'")
+          .replaceAll('&quot;', '"')  
+          .replaceAll(/&quot;/g, '"')
+          .replaceAll('&euml;','ë')
+  } else if (typeof(html) === 'object') {
+    const newArray = []
+    for (let item of html) {
+      newArray.push(
+        item
+          .replaceAll('&amp;quot;', "'")  
+          .replaceAll('&#039;', "'")
+          .replaceAll('&quot;', '"')  
+          .replaceAll(/&quot;/g, '"')
+          .replaceAll('&euml;','ë')
+      )
+      return newArray
+    } 
+  }
 }
 
 export const createQuestion = (questionJson) => {
   const questionObject = {
-    category: questionJson.category,
-    type: questionJson.type,
-    difficulty: questionJson.difficulty,
+    category: format(questionJson.category),
+    type: format(questionJson.type),
+    difficulty: format(questionJson.difficulty),
     question: format(questionJson.question),
-    correctAnswer: questionJson.correct_answer,
-    incorrectAnswers: questionJson.incorrect_answers
+    correctAnswer: format(questionJson.correct_answer),
+    incorrectAnswers: format(questionJson.incorrect_answers)
   }
   let chosenAnswer = ''
 
